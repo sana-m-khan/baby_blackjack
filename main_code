@@ -1,0 +1,63 @@
+/**
+ * baby blackjack :)
+ *
+ * @author S.Khan
+ * @version 11/27/23
+ */
+import java.util.Scanner;
+public class blackjack
+{
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
+    int mnm = 50, wager = 0, pc1=0, pc2=0, pctotal, dc1=0, dc2=0, dctotal = 0, playagain = 0, 
+    numgames=0, wins=0, loss=0;
+    boolean play = true;
+    
+    while (play) {
+      System.out.print("You have " + mnm + " M&Ms. How many would you like to wager? ");
+      wager = in.nextInt();
+      numgames++;
+      while (wager < 0 || wager > mnm) {
+        System.out.println("You can't wager that much.");
+        System.out.print("You have " + mnm + " M&Ms. How many would you like to wager? ");
+        wager = in.nextInt();
+      }
+
+      pc1 = (int)(Math.random()*10) + 1;
+      pc2 = (int)(Math.random()*10) + 1;
+      dc1 = (int)(Math.random()*10) + 1;
+      dc2 = (int)(Math.random()*10) + 1;
+      pctotal = pc1 + pc2;
+      dctotal = dc1 + dc2;
+
+      System.out.println("You drew " + pc1 + " and " + pc2);
+      System.out.println("The dealer drew " + dc1 + " and " + dc2);
+      if (pctotal > dctotal) {
+      System.out.println("You win!");
+      mnm += wager;
+      wins++;
+      }
+      else if (pctotal < dctotal) {
+      System.out.println("You lose!");
+      mnm -= wager;
+      loss++;
+      }
+      if (mnm == 0) {
+        System.out.println("You're out of M&Ms.");
+        play = false;
+      }
+      if (mnm > 0) {
+      System.out.print("Would you like to play again? Enter 0 to quit or 1 to continue ");
+      playagain = in.nextInt();
+      if (playagain == 0) {
+        play = false;
+      }
+      else if (playagain == 1) {
+        continue;
+      }
+      }
+    }
+    System.out.println("Thanks for playing! You played " + numgames + " times. You won " + wins + 
+    " times and lost " + loss + " times. You have " + mnm + " M&Ms left");
+}
+}
